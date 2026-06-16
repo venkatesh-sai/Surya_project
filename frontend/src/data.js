@@ -60,17 +60,17 @@ export const featuredXeroxProducts = [
 export const featuredRisoProducts = [
   {
     title: "A4 Digital Duplicators",
-    text: "Efficient RISO duplication for quick, cost-controlled print runs.",
+    text: "Compact RISO digital duplicators for economical and high-speed bulk printing.",
     meta: "RISO",
   },
   {
     title: "A3 Digital Duplicators",
-    text: "High-volume RISO systems for institutions and print rooms.",
+    text: "High-volume RISO digital duplicators for institutions, schools, and print rooms.",
     meta: "RISO",
   },
   {
-    title: "Baby Offset Machines",
-    text: "RISO category placeholder for compact offset-style business printing needs.",
+    title: "Digital Baby Offset Machines",
+    text: 'Popularly known as "Aam Aadmi Ka Digital Press", ideal for fast and cost-effective bulk printing.',
     meta: "RISO",
   },
 ];
@@ -124,7 +124,7 @@ export const risoCategories = [
   "Legal Size Digital Duplicators",
   "B4 Digital Duplicators",
   "A3 Digital Duplicators",
-  "Baby Offset Machines",
+  "Digital Baby Offset Machines",
 ];
 
 export const gallerySections = [
@@ -168,7 +168,13 @@ export const whyChooseUs = [
   },
 ];
 
-export const serviceAreas = ["Warangal", "Karimnagar", "Nizamabad", "Nalgonda"];
+export const serviceAreas = [
+  "Hyderabad",
+  "Warangal",
+  "Karimnagar",
+  "Nizamabad",
+  "Nalgonda",
+];
 
 export const certificates = [
   {

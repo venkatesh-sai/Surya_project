@@ -1,9 +1,17 @@
 import AnimatedLabel from "../components/AnimatedLabel";
 import ScrollReveal from "../components/ScrollReveal";
+import SEO from "../components/SEO";
 
 function Contact() {
   return (
     <>
+      <SEO
+        title="Contact Surya Enterprises | Xerox Dealer in Hyderabad"
+        description="Contact Surya Enterprises for Xerox printers, RISO duplicators, rentals, AMC, installation and service support in Telangana."
+        keywords="Xerox dealer Hyderabad, Xerox printer dealer, Xerox MFP, Xerox rental Hyderabad, Printer AMC Telangana, RISO dealer Telangana, Photocopier dealer Hyderabad"
+        image="/images/seo-banner.jpg"
+        url="/contact"
+      />
       {/* Contact Hero Section */}
       <section className="page-hero compact-hero">
         <AnimatedLabel text="Contact" />

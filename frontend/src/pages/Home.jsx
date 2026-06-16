@@ -3,6 +3,7 @@ import AnimatedLabel from "../components/AnimatedLabel";
 import CardGrid from "../components/CardGrid";
 import SectionHeader from "../components/SectionHeader";
 import ScrollReveal from "../components/ScrollReveal";
+import SEO from "../components/SEO";
 import {
   certificates,
   featuredRisoProducts,
@@ -11,11 +12,21 @@ import {
   serviceAreas,
   whyChooseUs,
 } from "../data";
-import xeroxLogo from "../assets/logos/xerox_logo.png";
+import risoLogo from "../assets/logos/riso-logo.png";
+import xeroxLogo from "../assets/logos/xerox-logo.png";
 
 function Home() {
+  const marqueeServiceAreas = [...serviceAreas, ...serviceAreas];
+
   return (
     <>
+      <SEO
+        title="Xerox Dealer in Hyderabad | Printers, Rentals & AMC | Surya Enterprises"
+        description="Authorized Xerox India and RISO India dealer in Hyderabad offering printers, multifunction devices, rentals, AMC, installation and repair services across Telangana."
+        keywords="Xerox dealer Hyderabad, Xerox printer dealer, Xerox MFP, Xerox rental Hyderabad, Printer AMC Telangana, RISO dealer Telangana, Photocopier dealer Hyderabad"
+        image="/images/seo-banner.jpg"
+        url="/"
+      />
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-content">
@@ -52,7 +63,7 @@ function Home() {
         />
         <div className="stats-grid home-stats">
           <ScrollReveal><strong>25+</strong><span>Years Experience</span></ScrollReveal>
-          <ScrollReveal index={1}><strong>4</strong><span>Service Regions</span></ScrollReveal>
+          <ScrollReveal index={1}><strong>4</strong><span>Service Centers</span></ScrollReveal>
           <ScrollReveal index={2}><strong>2</strong><span>Authorized Brands</span></ScrollReveal>
           <ScrollReveal index={3}><strong>1999</strong><span>Established</span></ScrollReveal>
         </div>
@@ -72,24 +83,30 @@ function Home() {
       <section className="page-section">
         <SectionHeader
           eyebrow="Authorized Brands"
-          title="Certified sales and service support"
-          text="Authorized business partner support for Xerox India and RISO India office printing solutions."
+          title="Authorized Dealer Since 1999"
+          text="Official Partner of Xerox India & RISO India"
           align="center"
         />
-        <div className="brand-grid">
-          <ScrollReveal as="article" className="brand-card">
-            <img src={xeroxLogo} alt="Xerox India logo" />
-            <h3>Xerox India</h3>
-            <p>Authorized Silver Partner</p>
-            <AnimatedLabel text="Authorized Business Partner" className="brand-label" />
-          </ScrollReveal>
-          <ScrollReveal as="article" className="brand-card brand-card-text" index={1}>
-            <strong>RISO</strong>
-            <h3>RISO India</h3>
-            <p>Authorized Channel Partner</p>
-            <AnimatedLabel text="Certified Sales & Service Support" className="brand-label" />
-          </ScrollReveal>
-        </div>
+        <ScrollReveal className="authorized-brands-panel">
+          <div className="brand-grid">
+            <article className="brand-card brand-card-xerox">
+              <div className="brand-logo-frame">
+                <img src={xeroxLogo} alt="Xerox India logo" />
+              </div>
+              <h3>Xerox India</h3>
+              <p>Authorized Silver Partner</p>
+              <AnimatedLabel text="Authorized Business Partner" className="brand-label" />
+            </article>
+            <article className="brand-card brand-card-riso">
+              <div className="brand-logo-frame">
+                <img src={risoLogo} alt="RISO India logo" />
+              </div>
+              <h3>RISO India</h3>
+              <p>Authorized Channel Partner</p>
+              <AnimatedLabel text="Certified Sales & Service Support" className="brand-label" />
+            </article>
+          </div>
+        </ScrollReveal>
       </section>
 
       {/* Product Categories Section */}
@@ -113,11 +130,11 @@ function Home() {
       </section>
 
       {/* Featured RISO Products Section */}
-      <section className="page-section light-section">
+      <section className="page-section light-section riso-theme">
         <SectionHeader
           eyebrow="Featured RISO Products"
-          title="Digital duplicators for high-volume output"
-          text="RISO product placeholders for duplicator, offset, and bulk print solution categories."
+          title="Digital Duplicator / Digital Baby Offset Machine"
+          text="Aam Aadmi Ka Digital Press, designed for fast and cost-effective bulk printing."
         />
         <CardGrid items={featuredRisoProducts} variant="featured" />
       </section>
@@ -144,14 +161,19 @@ function Home() {
           text="Serving key business regions with installation, support, maintenance, and office printing solutions."
           align="center"
         />
-        <div className="area-grid">
-          {serviceAreas.map((area, index) => (
-            <ScrollReveal as="article" className="area-card" index={index} key={area}>
-              <AnimatedLabel text="Telangana" />
-              <h3>{area}</h3>
-            </ScrollReveal>
-          ))}
-        </div>
+        <ScrollReveal className="area-marquee" aria-label="Service areas carousel">
+          <div className="area-marquee-track">
+            {marqueeServiceAreas.map((area, index) => (
+              <article className="area-card" key={`${area}-${index}`}>
+                <AnimatedLabel text="Telangana" />
+                <h3>{area}</h3>
+                {area === "Hyderabad" && (
+                  <span className="area-badge">Now Serving Hyderabad</span>
+                )}
+              </article>
+            ))}
+          </div>
+        </ScrollReveal>
       </section>
 
       {/* Contact CTA Section */}

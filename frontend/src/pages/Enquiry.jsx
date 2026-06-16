@@ -1,9 +1,17 @@
 import AnimatedLabel from "../components/AnimatedLabel";
 import ScrollReveal from "../components/ScrollReveal";
+import SEO from "../components/SEO";
 
 function Enquiry() {
   return (
     <>
+      <SEO
+        title="Get a Quote | Xerox & RISO Solutions | Surya Enterprises"
+        description="Submit your enquiry for Xerox printers, RISO duplicators, rentals, AMC and office printing solutions. Our team will contact you shortly."
+        keywords="Xerox dealer Hyderabad, Xerox printer dealer, Xerox MFP, Xerox rental Hyderabad, Printer AMC Telangana, RISO dealer Telangana, Photocopier dealer Hyderabad"
+        image="/images/seo-banner.jpg"
+        url="/enquiry"
+      />
       {/* Enquiry Hero Section */}
       <section className="page-hero compact-hero">
         <AnimatedLabel text="Get Quote" />

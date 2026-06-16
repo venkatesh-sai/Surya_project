@@ -1,11 +1,19 @@
 import AnimatedLabel from "../components/AnimatedLabel";
 import CardGrid from "../components/CardGrid";
 import SectionHeader from "../components/SectionHeader";
+import SEO from "../components/SEO";
 import { services } from "../data";
 
 function Services() {
   return (
     <>
+      <SEO
+        title="Printer Services in Telangana | Rental, AMC & Repairs"
+        description="Professional Xerox and RISO printer rental, AMC, maintenance, installation and repair services for offices and businesses in Telangana."
+        keywords="Xerox dealer Hyderabad, Xerox printer dealer, Xerox MFP, Xerox rental Hyderabad, Printer AMC Telangana, RISO dealer Telangana, Photocopier dealer Hyderabad"
+        image="/images/seo-banner.jpg"
+        url="/services"
+      />
       {/* Services Hero Section */}
       <section className="page-hero compact-hero">
         <AnimatedLabel text="Services" />
