@@ -1,15 +1,19 @@
 import { Link } from "react-router-dom";
-import xeroxLogo from "../assets/logos/xerox_logo.png";
+import risoLogo from "../assets/logos/riso-logo.png";
+import xeroxLogo from "../assets/logos/xerox-logo.png";
 
 function Navbar() {
   return (
     <header className="navbar">
       {/* Logo Area */}
       <div className="navbar-logo">
-        <Link to="/">
-          <img src={xeroxLogo} alt="Xerox logo" />
+        <Link to="/" className="company-brand">
+          <span className="authorized-brand-logos" aria-label="Authorized Xerox and RISO brands">
+            <img src={xeroxLogo} alt="Xerox authorized dealer logo" />
+            <img src={risoLogo} alt="RISO authorized dealer logo" />
+          </span>
+          <span className="company-name">Surya Enterprises</span>
         </Link>
-        <span>Surya Enterprises</span>
       </div>
 
       {/* Navigation Menu */}

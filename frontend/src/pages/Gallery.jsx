@@ -1,11 +1,19 @@
 import AnimatedLabel from "../components/AnimatedLabel";
 import SectionHeader from "../components/SectionHeader";
 import ScrollReveal from "../components/ScrollReveal";
+import SEO from "../components/SEO";
 import { gallerySections } from "../data";
 
 function Gallery() {
   return (
     <>
+      <SEO
+        title="Gallery | Xerox & RISO Products, Certificates & Installations"
+        description="View Xerox and RISO products, authorization certificates, installations and office printing solutions offered by Surya Enterprises."
+        keywords="Xerox dealer Hyderabad, Xerox printer dealer, Xerox MFP, Xerox rental Hyderabad, Printer AMC Telangana, RISO dealer Telangana, Photocopier dealer Hyderabad"
+        image="/images/seo-banner.jpg"
+        url="/gallery"
+      />
       {/* Gallery Hero Section */}
       <section className="page-hero compact-hero">
         <AnimatedLabel text="Gallery" />

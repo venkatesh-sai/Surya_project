@@ -2,11 +2,19 @@ import AnimatedLabel from "../components/AnimatedLabel";
 import AnimatedCounter from "../components/AnimatedCounter";
 import SectionHeader from "../components/SectionHeader";
 import ScrollReveal from "../components/ScrollReveal";
+import SEO from "../components/SEO";
 import { certificates } from "../data";
 
 function About() {
   return (
     <>
+      <SEO
+        title="About Surya Enterprises | Authorized Xerox & RISO Dealer Since 1999"
+        description="Surya Enterprises is an authorized Xerox India and RISO India dealer serving Telangana since 1999 with sales, service, installation and office printing solutions."
+        keywords="Xerox dealer Hyderabad, Xerox printer dealer, Xerox MFP, Xerox rental Hyderabad, Printer AMC Telangana, RISO dealer Telangana, Photocopier dealer Hyderabad"
+        image="/images/seo-banner.jpg"
+        url="/about"
+      />
       {/* Company Overview Section */}
       <section className="page-hero compact-hero">
         <AnimatedLabel text="About Us" />

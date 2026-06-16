@@ -3,6 +3,7 @@ import AnimatedLabel from "../components/AnimatedLabel";
 import CardGrid from "../components/CardGrid";
 import SectionHeader from "../components/SectionHeader";
 import ScrollReveal from "../components/ScrollReveal";
+import SEO from "../components/SEO";
 import { productCategories, risoCategories, xeroxCategories } from "../data";
 
 const xeroxCards = xeroxCategories.map((title) => ({
@@ -20,6 +21,13 @@ const risoCards = risoCategories.map((title) => ({
 function Products() {
   return (
     <>
+      <SEO
+        title="Xerox & RISO Products | Printers, MFPs & Digital Duplicators"
+        description="Explore Xerox printers, multifunction printers, A3/A4 machines and RISO digital duplicators for offices, businesses and commercial printing."
+        keywords="Xerox dealer Hyderabad, Xerox printer dealer, Xerox MFP, Xerox rental Hyderabad, Printer AMC Telangana, RISO dealer Telangana, Photocopier dealer Hyderabad"
+        image="/images/seo-banner.jpg"
+        url="/products"
+      />
       {/* Products Hero Section */}
       <section className="page-hero compact-hero">
         <AnimatedLabel text="Products" />
@@ -64,14 +72,14 @@ function Products() {
       </section>
 
       {/* RISO Products Section */}
-      <section className="page-section">
+      <section className="page-section riso-theme">
         <SectionHeader
           eyebrow="RISO Products"
           title="Digital duplicators and offset solutions"
           text="RISO categories for high-volume, economical duplication and print room productivity."
         />
         <CardGrid items={risoCards} variant="compact" />
-        <Link to="/products/riso" className="text-link">View RISO categories</Link>
+        <Link to="/products/riso" className="text-link text-link-riso">View RISO categories</Link>
       </section>
     </>
   );

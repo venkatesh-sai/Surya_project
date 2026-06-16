@@ -1,6 +1,7 @@
 import AnimatedLabel from "../components/AnimatedLabel";
 import CardGrid from "../components/CardGrid";
 import SectionHeader from "../components/SectionHeader";
+import SEO from "../components/SEO";
 import { xeroxCategories } from "../data";
 
 const xeroxCards = xeroxCategories.map((title) => ({
@@ -12,6 +13,13 @@ const xeroxCards = xeroxCategories.map((title) => ({
 function XeroxProducts() {
   return (
     <>
+      <SEO
+        title="Xerox Printers & Multifunction Devices | Surya Enterprises"
+        description="Browse Xerox A4 and A3 printers, monochrome and colour multifunction devices with authorized sales and support from Surya Enterprises."
+        keywords="Xerox dealer Hyderabad, Xerox printer dealer, Xerox MFP, Xerox rental Hyderabad, Printer AMC Telangana, RISO dealer Telangana, Photocopier dealer Hyderabad"
+        image="/images/seo-banner.jpg"
+        url="/products/xerox"
+      />
       {/* Xerox Products Hero Section */}
       <section className="page-hero compact-hero">
         <AnimatedLabel text="Xerox Products" />
