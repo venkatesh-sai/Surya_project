@@ -14,9 +14,35 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from rest_framework.routers import DefaultRouter
+
+from brands.views import BrandViewSet
+from categories.views import CategoryViewSet
+from enquiries.views import EnquiryViewSet
+from locations.views import LocationViewSet
+from project.admin_auth import AdminLoginView, AdminLogoutView, AdminMeView
+from products.views import ProductViewSet
+from testimonials.views import TestimonialViewSet
+
+router = DefaultRouter()
+router.register(r'locations', LocationViewSet)
+router.register(r'brands', BrandViewSet)
+router.register(r'categories', CategoryViewSet)
+router.register(r'products', ProductViewSet)
+router.register(r'enquiries', EnquiryViewSet)
+router.register(r'testimonials', TestimonialViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/admin/login/', AdminLoginView.as_view()),
+    path('api/admin/logout/', AdminLogoutView.as_view()),
+    path('api/admin/me/', AdminMeView.as_view()),
+    path('api/admin/', include(router.urls)),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
