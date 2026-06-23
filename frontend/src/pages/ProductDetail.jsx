@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import AnimatedLabel from "../components/AnimatedLabel";
 import ScrollReveal from "../components/ScrollReveal";
 import SEO from "../components/SEO";
@@ -38,21 +38,107 @@ const supportBadges = [
 
 function displayValue(value) {
   if (Array.isArray(value)) {
-    return value.length ? value.join(", ") : "Contact for details";
+    const values = value.map((item) => displayValue(item)).filter(Boolean);
+    return values.length ? values.join(", ") : "Contact for details";
   }
 
   if (value && typeof value === "object") {
     return Object.entries(value)
-      .map(([key, entryValue]) => `${key}: ${entryValue}`)
-      .join(", ");
+      .map(([key, entryValue]) => `${formatSpecLabel(key)}: ${displayValue(entryValue)}`)
+      .join(", ") || "Contact for details";
   }
 
-  return value || "Contact for details";
+  return value === 0 || value ? String(value) : "Contact for details";
+}
+
+function parseJsonSafely(value) {
+  if (typeof value !== "string") {
+    return value;
+  }
+
+  try {
+    return JSON.parse(value);
+  } catch {
+    return value;
+  }
+}
+
+function formatSpecLabel(label) {
+  return String(label || "")
+    .replace(/[_-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/\b\w/g, (character) => character.toUpperCase());
+}
+
+function normalizeSpecifications(specifications) {
+  const parsed = parseJsonSafely(specifications);
+
+  if (!parsed) {
+    return [];
+  }
+
+  if (Array.isArray(parsed)) {
+    return parsed.flatMap((item, index) => {
+      const parsedItem = parseJsonSafely(item);
+
+      if (!parsedItem) {
+        return [];
+      }
+
+      if (Array.isArray(parsedItem)) {
+        const [label, value] = parsedItem;
+        return label || value ? [[formatSpecLabel(label || `Specification ${index + 1}`), value]] : [];
+      }
+
+      if (typeof parsedItem === "object") {
+        return Object.entries(parsedItem)
+          .filter(([, value]) => value !== null && value !== undefined && value !== "")
+          .map(([label, value]) => [formatSpecLabel(label), value]);
+      }
+
+      return [[`Specification ${index + 1}`, parsedItem]];
+    });
+  }
+
+  if (typeof parsed === "object") {
+    return Object.entries(parsed)
+      .filter(([, value]) => value !== null && value !== undefined && value !== "")
+      .map(([label, value]) => [formatSpecLabel(label), value]);
+  }
+
+  return String(parsed)
+    .split(/\r?\n|,/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line, index) => {
+      if (line.includes(":")) {
+        const [label, ...valueParts] = line.split(":");
+        return [formatSpecLabel(label), valueParts.join(":").trim()];
+      }
+
+      return [`Specification ${index + 1}`, line];
+    });
+}
+
+function normalizeFeatures(features) {
+  const parsed = parseJsonSafely(features);
+
+  if (Array.isArray(parsed)) {
+    return parsed
+      .map((feature) => displayValue(feature).trim())
+      .filter((feature) => feature && feature !== "Contact for details");
+  }
+
+  return String(parsed || "")
+    .split(/\r?\n/)
+    .map((feature) => feature.trim())
+    .filter(Boolean);
 }
 
 function fallbackImage(product) {
-  const category = product.category_name || "";
-  const brand = product.brand_name || "";
+  const category = product?.category_name || product?.category || "";
+  const brand = product?.brand_name || product?.brand || "";
 
   if (brand.toLowerCase().includes("riso") && category.toLowerCase().includes("inkjet")) {
     return risoInkjetImage;
@@ -74,7 +160,7 @@ function fallbackImage(product) {
 }
 
 function productBrandSlug(product) {
-  const brand = product.brand_slug || product.brand_name || "";
+  const brand = product?.brandSlug || product?.brand_slug || product?.brand_name || product?.brand || "";
   return brand.toLowerCase().includes("riso") ? "riso" : "xerox";
 }
 
@@ -83,36 +169,31 @@ function productPath(product) {
 }
 
 function productName(product) {
-  return product.name || `${product.brand_name} ${product.model}`;
+  return product?.name || [product?.brand_name, product?.model].filter(Boolean).join(" ") || "Product details";
 }
 
 function productImages(product) {
   return Array.isArray(product.images)
     ? product.images
-      .map((image) => image.image_url || image.image)
+      .map((image) => typeof image === "string" ? image : image?.image_url || image?.image)
       .filter(Boolean)
     : [];
 }
 
 function normalizeProduct(product) {
-  const keyFeatures = Array.isArray(product.key_features)
-    ? product.key_features
-    : String(product.key_features || "")
-      .split(/\r?\n/)
-      .map((feature) => feature.trim())
-      .filter(Boolean);
-
-  const specifications = product.specifications && typeof product.specifications === "object" && !Array.isArray(product.specifications)
-    ? product.specifications
-    : {};
+  const keyFeatures = normalizeFeatures(product.key_features);
+  const specifications = normalizeSpecifications(product.specifications);
 
   const images = productImages(product);
   const primaryImage = product.primary_image_url || images[0] || product.image_url || fallbackImage(product);
+  const brand = product.brand_name || "Brand not available";
+  const category = product.category_name || "Category not available";
 
   return {
     ...product,
-    brand: product.brand_name || "Contact for details",
-    category: product.category_name || "Contact for details",
+    brand,
+    brandSlug: product.brand_slug || productBrandSlug({ ...product, brand_name: brand }),
+    category,
     type: product.product_type || "Contact for details",
     paperSize: product.paper_size || "Contact for details",
     printSpeed: product.print_speed || "Contact for details",
@@ -126,6 +207,8 @@ function normalizeProduct(product) {
     brochureFile: product.brochure_file_url || product.brochure_file || "",
     images: images.length ? images : [primaryImage],
     image: primaryImage,
+    description: product.description || "Product details are not available yet. Contact Surya Enterprises for the latest configuration and availability.",
+    model: product.model || productName(product),
   };
 }
 
@@ -145,6 +228,7 @@ async function fetchProduct(productId) {
 
 function ProductDetail() {
   const { productId } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -177,6 +261,14 @@ function ProductDetail() {
     };
   }, [productId]);
 
+  function handleBack() {
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate("/products");
+    }
+  }
+
   if (loading) {
     return (
       <section className="page-hero compact-hero">
@@ -208,10 +300,12 @@ function ProductDetail() {
   const fullName = productName(product);
   const enquiryUrl = `/enquiry?product=${encodeURIComponent(fullName)}`;
   const galleryImages = [...new Set((product.images?.length ? product.images : [product.image]).filter(Boolean))];
-  const tableSpecs = [
-    ...specLabels.map(([key, label]) => [label, product[key]]),
-    ...Object.entries(product.specifications || {}),
-  ];
+  const labelledSpecs = specLabels
+    .map(([key, label]) => [label, product[key]])
+    .filter(([, value]) => value && value !== "Contact for details");
+  const tableSpecs = [...labelledSpecs, ...product.specifications];
+  const brandProductPath = productBrandSlug(product).includes("riso") ? "/products/riso" : "/products/xerox";
+  const brandProductLabel = productBrandSlug(product).includes("riso") ? "RISO Products" : "Xerox Products";
   const brandIntro = product.brand.toLowerCase().includes("riso")
     ? "RISO solutions are built for high-volume, cost-efficient printing and duplication, with practical workflows for schools, offices, institutions and print rooms."
     : "Xerox and Fujifilm office systems support dependable business printing, scanning and document workflows with local sales, installation and service support from Surya Enterprises.";
@@ -225,6 +319,20 @@ function ProductDetail() {
         image={product.image}
         url={productPath(product)}
       />
+
+      <div className="product-detail-nav-bar">
+        <nav className="breadcrumb-nav" aria-label="Breadcrumb">
+          <ol className="breadcrumb-list">
+            <li><Link className="breadcrumb-link" to="/">Home</Link></li>
+            <li><Link className="breadcrumb-link" to="/products">Products</Link></li>
+            <li><Link className="breadcrumb-link" to={brandProductPath}>{brandProductLabel}</Link></li>
+            <li><span className="breadcrumb-current">{fullName}</span></li>
+          </ol>
+        </nav>
+        <button className="product-back-button secondary-btn" type="button" onClick={handleBack}>
+          Back
+        </button>
+      </div>
 
       <section className="product-detail-hero premium-product-detail" id="top">
         <div className="product-gallery-panel">
@@ -281,7 +389,7 @@ function ProductDetail() {
                 Download Brochure
               </a>
             ) : (
-              <span className="secondary-btn disabled-link">Brochure Unavailable</span>
+              <span className="secondary-btn disabled-link">Brochure not available</span>
             )}
             <Link to={enquiryUrl} className="secondary-btn">Contact for Price</Link>
           </div>
@@ -302,11 +410,15 @@ function ProductDetail() {
         <ScrollReveal className="product-detail-panel" id="about-item">
           <AnimatedLabel text="About this item" />
           <h2>Highlights and key features</h2>
-          <ul>
-            {(product.keyFeatures.length ? product.keyFeatures : ["Contact for details"]).map((feature) => (
-              <li key={feature}>{feature}</li>
-            ))}
-          </ul>
+          {product.keyFeatures.length ? (
+            <ul>
+              {product.keyFeatures.map((feature) => (
+                <li key={feature}>{feature}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>Features not available</p>
+          )}
         </ScrollReveal>
 
         <ScrollReveal className="product-detail-panel" id="product-info">
@@ -323,16 +435,20 @@ function ProductDetail() {
         <ScrollReveal className="product-detail-panel product-spec-table-panel" id="specifications">
           <AnimatedLabel text="Specifications" />
           <h2>Technical specifications</h2>
-          <table className="product-spec-table">
-            <tbody>
-              {tableSpecs.map(([label, value]) => (
-                <tr key={label}>
-                  <th>{label}</th>
-                  <td>{displayValue(value)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          {tableSpecs.length ? (
+            <table className="product-spec-table">
+              <tbody>
+                {tableSpecs.map(([label, value], index) => (
+                  <tr key={`${label}-${index}`}>
+                    <th>{formatSpecLabel(label)}</th>
+                    <td>{displayValue(value)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>Specifications not available</p>
+          )}
         </ScrollReveal>
 
         <ScrollReveal className="product-detail-panel" id="brand-story">

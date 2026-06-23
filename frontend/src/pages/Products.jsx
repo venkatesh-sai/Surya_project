@@ -9,14 +9,14 @@ import xeroxColorMfpImage from "../assets/products/xerox-color-mfp.svg";
 import xeroxMfpImage from "../assets/products/xerox-mfp.svg";
 import xeroxPrinterImage from "../assets/products/xerox-printer.svg";
 
-const productFilters = [
-  "All",
-  "Xerox",
-  "RISO",
+const xeroxCategoryFilters = [
   "A4 Mono Printers",
   "A4 Mono MFP",
   "A3 Mono MFP",
   "A3 Colour MFP",
+];
+
+const risoCategoryFilters = [
   "Digital Duplicators",
 ];
 
@@ -183,25 +183,87 @@ function Products() {
         </p>
       </section>
 
-      <ScrollReveal as="section" className="filter-panel product-filter-panel">
-        <input
-          type="search"
-          placeholder="Search by model, brand, speed, or category"
-          aria-label="Search products"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-        />
-        <div className="filter-buttons" aria-label="Product filters">
-          {productFilters.map((filter) => (
-            <button
-              className={activeFilter === filter ? "active" : ""}
-              key={filter}
-              type="button"
-              onClick={() => setActiveFilter(filter)}
-            >
-              {filter}
-            </button>
-          ))}
+      <ScrollReveal as="section" className="product-filter-shell product-filter-panel">
+        <div className="product-filter-header">
+          <div className="product-filter-title">
+            <AnimatedLabel text="Product Finder" />
+            <h2>Find the right printing solution</h2>
+            <p>Search by model, brand, category, speed or paper size.</p>
+          </div>
+          <div className="product-filter-search">
+            <input
+              type="search"
+              placeholder="Search products"
+              aria-label="Search products"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+            />
+          </div>
+        </div>
+
+        <button
+          aria-pressed={activeFilter === "All"}
+          className={`product-filter-chip product-filter-chip-all ${activeFilter === "All" ? "product-filter-chip-active" : ""}`}
+          type="button"
+          onClick={() => setActiveFilter("All")}
+        >
+          All Products
+        </button>
+
+        <div className="product-filter-groups" aria-label="Product filters">
+          <article className="product-brand-filter-card product-brand-filter-card-xerox">
+            <div className="product-brand-filter-card-header">
+              <button
+                aria-pressed={activeFilter === "Xerox"}
+                className={`product-filter-chip product-filter-chip-brand ${activeFilter === "Xerox" ? "product-filter-chip-active" : ""}`}
+                type="button"
+                onClick={() => setActiveFilter("Xerox")}
+              >
+                Xerox Products
+              </button>
+              <span>Office printers & MFPs</span>
+            </div>
+            <div className="product-filter-chip-row">
+              {xeroxCategoryFilters.map((filter) => (
+                <button
+                  aria-pressed={activeFilter === filter}
+                  className={`product-filter-chip ${activeFilter === filter ? "product-filter-chip-active" : ""}`}
+                  key={filter}
+                  type="button"
+                  onClick={() => setActiveFilter(filter)}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
+          </article>
+
+          <article className="product-brand-filter-card product-brand-filter-card-riso">
+            <div className="product-brand-filter-card-header">
+              <button
+                aria-pressed={activeFilter === "RISO"}
+                className={`product-filter-chip product-filter-chip-brand ${activeFilter === "RISO" ? "product-filter-chip-active" : ""}`}
+                type="button"
+                onClick={() => setActiveFilter("RISO")}
+              >
+                RISO Products
+              </button>
+              <span>Duplicators & high-volume print</span>
+            </div>
+            <div className="product-filter-chip-row">
+              {risoCategoryFilters.map((filter) => (
+                <button
+                  aria-pressed={activeFilter === filter}
+                  className={`product-filter-chip ${activeFilter === filter ? "product-filter-chip-active" : ""}`}
+                  key={filter}
+                  type="button"
+                  onClick={() => setActiveFilter(filter)}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
+          </article>
         </div>
       </ScrollReveal>
 
