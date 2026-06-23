@@ -2,7 +2,17 @@ import AnimatedLabel from "../components/AnimatedLabel";
 import CardGrid from "../components/CardGrid";
 import SectionHeader from "../components/SectionHeader";
 import SEO from "../components/SEO";
-import { services } from "../data";
+
+const services = [
+  { title: "Xerox Machine Sales", text: "New Xerox machines matched to your print volume, team size, and workflow." },
+  { title: "Xerox Machine Rental", text: "Flexible rental plans for offices that need performance without upfront purchase." },
+  { title: "Printer Sales", text: "Business printers for daily office printing, colour documents, and reliable output." },
+  { title: "Printer Service", text: "Professional troubleshooting, maintenance, spares support, and machine care." },
+  { title: "Installation Services", text: "Professional machine installation, setup guidance, and handover support." },
+  { title: "Digital Duplicator Solutions", text: "RISO duplicator guidance for schools, offices, print shops, and bulk print teams." },
+  { title: "AMC Support", text: "Annual maintenance coverage to keep office equipment productive and available." },
+  { title: "Office Printing Solutions", text: "Consulting, installation, training, and support for complete document workflows." },
+];
 
 function Services() {
   return (

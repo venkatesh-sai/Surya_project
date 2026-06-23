@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.utils.decorators import method_decorator
 from rest_framework import status
@@ -57,7 +58,11 @@ class AdminLoginView(APIView):
         return Response({'user': serialize_user(authenticated_user)})
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class AdminLogoutView(APIView):
+    authentication_classes = []
+    permission_classes = [AllowAny]
+
     def post(self, request):
         logout(request)
         return Response({'detail': 'Logged out'})

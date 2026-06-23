@@ -1,5 +1,9 @@
-import { useEffect, useState } from "react";
-import useInViewOnce from "../hooks/useInViewOnce";
+import { useEffect, useRef, useState } from "react";
+
+const counterObserverOptions = {
+  rootMargin: "0px 0px -8% 0px",
+  threshold: 0.25,
+};
 
 const prefersReducedMotion = () =>
   typeof window !== "undefined" &&
@@ -7,11 +11,30 @@ const prefersReducedMotion = () =>
 
 function AnimatedCounter({ end, suffix = "", duration = 1800 }) {
   const reduceMotion = prefersReducedMotion();
+  const ref = useRef(null);
   const [value, setValue] = useState(() => (reduceMotion ? end : 0));
-  const { ref, isVisible } = useInViewOnce({
-    rootMargin: "0px 0px -8% 0px",
-    threshold: 0.25,
-  });
+  const [isVisible, setIsVisible] = useState(
+    () => typeof window !== "undefined" && !("IntersectionObserver" in window)
+  );
+
+  useEffect(() => {
+    const element = ref.current;
+
+    if (!element || isVisible) {
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsVisible(true);
+        observer.disconnect();
+      }
+    }, counterObserverOptions);
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, [isVisible]);
 
   useEffect(() => {
     if (!isVisible || reduceMotion) {

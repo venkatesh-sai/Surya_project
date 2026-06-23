@@ -2,7 +2,14 @@ import AnimatedLabel from "../components/AnimatedLabel";
 import SectionHeader from "../components/SectionHeader";
 import ScrollReveal from "../components/ScrollReveal";
 import SEO from "../components/SEO";
-import { gallerySections } from "../data";
+
+const gallerySections = [
+  "Product Gallery",
+  "Office Gallery",
+  "Installation Gallery",
+  "Service Gallery",
+  "Certificates Gallery",
+];
 
 function Gallery() {
   return (

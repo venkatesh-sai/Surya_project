@@ -2,7 +2,15 @@ import AnimatedLabel from "../components/AnimatedLabel";
 import CardGrid from "../components/CardGrid";
 import SectionHeader from "../components/SectionHeader";
 import SEO from "../components/SEO";
-import { xeroxCategories } from "../data";
+
+const xeroxCategories = [
+  "A4 Mono Printers",
+  "A3 Colour Printers",
+  "A4 Mono MFP",
+  "A4 Colour MFP",
+  "A3 Mono MFP",
+  "A3 Colour MFP",
+];
 
 const xeroxCards = xeroxCategories.map((title) => ({
   title,

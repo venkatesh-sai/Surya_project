@@ -2,7 +2,14 @@ import AnimatedLabel from "../components/AnimatedLabel";
 import CardGrid from "../components/CardGrid";
 import SectionHeader from "../components/SectionHeader";
 import SEO from "../components/SEO";
-import { risoCategories } from "../data";
+
+const risoCategories = [
+  "A4 Digital Duplicators",
+  "Legal Size Digital Duplicators",
+  "B4 Digital Duplicators",
+  "A3 Digital Duplicators",
+  "Digital Baby Offset Machines",
+];
 
 const risoCards = risoCategories.map((title) => ({
   title,

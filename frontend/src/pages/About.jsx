@@ -3,7 +3,11 @@ import AnimatedCounter from "../components/AnimatedCounter";
 import SectionHeader from "../components/SectionHeader";
 import ScrollReveal from "../components/ScrollReveal";
 import SEO from "../components/SEO";
-import { certificates } from "../data";
+
+const certificates = [
+  { title: "Xerox India Silver Partner Certificate" },
+  { title: "RISO India Authorized Channel Partner Certificate" },
+];
 
 function About() {
   return (

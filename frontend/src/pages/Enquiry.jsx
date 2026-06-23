@@ -1,8 +1,12 @@
 import AnimatedLabel from "../components/AnimatedLabel";
 import ScrollReveal from "../components/ScrollReveal";
 import SEO from "../components/SEO";
+import { useSearchParams } from "react-router-dom";
 
 function Enquiry() {
+  const [searchParams] = useSearchParams();
+  const selectedProduct = searchParams.get("product") || "";
+
   return (
     <>
       <SEO
@@ -35,8 +39,9 @@ function Enquiry() {
           </label>
           <label>
             Product Interest
-            <select defaultValue="">
+            <select defaultValue={selectedProduct}>
               <option value="" disabled>Select product interest</option>
+              {selectedProduct && <option value={selectedProduct}>{selectedProduct}</option>}
               <option>Xerox Printer</option>
               <option>Xerox MFP</option>
               <option>RISO Digital Duplicator</option>

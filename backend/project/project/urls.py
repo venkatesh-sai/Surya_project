@@ -41,6 +41,7 @@ urlpatterns = [
     path('api/admin/login/', AdminLoginView.as_view()),
     path('api/admin/logout/', AdminLogoutView.as_view()),
     path('api/admin/me/', AdminMeView.as_view()),
+    path('api/', include(router.urls)),
     path('api/admin/', include(router.urls)),
 ]
 

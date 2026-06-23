@@ -12,7 +12,17 @@ SECRET_KEY = 'django-insecure-pbbl@wuh_fo-2$h$j0*!r38h*=5rdzf+@*^#188p)oa3%gfu(q
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'testserver']
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
