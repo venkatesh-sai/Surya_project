@@ -29,15 +29,30 @@ function Navbar() {
   }
 
   return (
+<<<<<<< ours
+=======
+<<<<<<< Updated upstream
+    <nav>
+      <h2>Xerox Dealer</h2>
+    </nav>
+=======
+>>>>>>> theirs
     <header className={`navbar ${menuOpen ? "navbar-open" : ""}`}>
       <div className="navbar-mobile-row">
         {/* Logo Area */}
         <div className="navbar-logo">
           <Link to="/" className="company-brand" onClick={closeMenu}>
             <span className="authorized-brand-logos" aria-label="Authorized Xerox and RISO brands">
+<<<<<<< ours
               <img src={xeroxLogo} alt="Xerox authorized dealer logo" />
               <img src={risoLogo} alt="RISO authorized dealer logo" />
             </span>
+=======
+              <img id="xerox-logo" src={xeroxLogo} alt="Xerox authorized dealer logo" />
+              <img src={risoLogo} alt="RISO authorized dealer logo" />
+            </span>
+            <span className="drawer-subtitle">Authorized By</span>
+>>>>>>> theirs
             <span className="company-name">Surya Enterprises</span>
           </Link>
         </div>
@@ -65,6 +80,7 @@ function Navbar() {
         onClick={closeMenu}
       ></button>
 
+<<<<<<< ours
       <div className="navbar-drawer" id="mobile-navigation">
         <div className="navbar-drawer-header">
           <span className="company-name">Surya Enterprises</span>
@@ -76,6 +92,25 @@ function Navbar() {
           >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
+=======
+      <div
+        className={`navbar-drawer ${menuOpen ? "active" : ""}`}
+        id="mobile-navigation"
+      >
+        <div className="navbar-drawer-header">
+          <div className="drawer-brand">
+            <span className="company-name">Surya Enterprises</span>
+          </div>
+
+          <button
+            type="button"
+            className="navbar-drawer-close"
+            aria-label="Close navigation menu"
+            onClick={closeMenu}
+          >
+            <span className="close-line"></span>
+            <span className="close-line"></span>
+>>>>>>> theirs
           </button>
         </div>
 
@@ -98,6 +133,10 @@ function Navbar() {
         </div>
       </div>
     </header>
+<<<<<<< ours
+=======
+>>>>>>> Stashed changes
+>>>>>>> theirs
   );
 }
 

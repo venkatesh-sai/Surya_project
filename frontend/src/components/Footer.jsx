@@ -1,4 +1,17 @@
+<<<<<<< ours
 import { Link } from "react-router-dom";
+=======
+<<<<<<< Updated upstream
+=======
+import { Link } from "react-router-dom";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaYoutube,
+  FaWhatsapp,
+} from "react-icons/fa";
+>>>>>>> theirs
 
 function Footer() {
   return (
@@ -11,6 +24,61 @@ function Footer() {
             Authorized Xerox India Silver Partner and RISO India Authorized
             Channel Partner established in 1999.
           </p>
+<<<<<<< ours
+=======
+
+          <div className="social-icons">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="facebook"
+            >
+              <FaFacebookF />
+            </a>
+
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="instagram"
+            >
+              <FaInstagram />
+            </a>
+
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="linkedin"
+            >
+              <FaLinkedinIn />
+            </a>
+
+            <a
+              href="https://youtube.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="YouTube"
+              className="youtube"
+            >
+              <FaYoutube />
+            </a>
+
+            <a
+              href="https://wa.me/919396309283"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              className="whatsapp"
+            >
+              <FaWhatsapp />
+            </a>
+          </div>
+>>>>>>> theirs
         </section>
 
         {/* Footer Quick Links Section */}
@@ -37,10 +105,18 @@ function Footer() {
 
       {/* Footer Copyright Section */}
       <div className="footer-bottom">
+<<<<<<< ours
         <p>Copyright 2026 Surya Enterprises. All rights reserved.</p>
+=======
+        <p>Copyright © 2026 Surya Enterprises. All rights reserved.</p>
+>>>>>>> theirs
       </div>
     </footer>
   );
 }
 
 export default Footer;
+<<<<<<< ours
+=======
+>>>>>>> Stashed changes
+>>>>>>> theirs
