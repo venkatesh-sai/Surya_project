@@ -1,8 +1,3 @@
-<<<<<<< ours
-import { Link } from "react-router-dom";
-=======
-<<<<<<< Updated upstream
-=======
 import { Link } from "react-router-dom";
 import {
   FaFacebookF,
@@ -11,7 +6,6 @@ import {
   FaYoutube,
   FaWhatsapp,
 } from "react-icons/fa";
->>>>>>> theirs
 
 function Footer() {
   return (
@@ -24,8 +18,6 @@ function Footer() {
             Authorized Xerox India Silver Partner and RISO India Authorized
             Channel Partner established in 1999.
           </p>
-<<<<<<< ours
-=======
 
           <div className="social-icons">
             <a
@@ -78,7 +70,6 @@ function Footer() {
               <FaWhatsapp />
             </a>
           </div>
->>>>>>> theirs
         </section>
 
         {/* Footer Quick Links Section */}
@@ -105,18 +96,10 @@ function Footer() {
 
       {/* Footer Copyright Section */}
       <div className="footer-bottom">
-<<<<<<< ours
-        <p>Copyright 2026 Surya Enterprises. All rights reserved.</p>
-=======
         <p>Copyright © 2026 Surya Enterprises. All rights reserved.</p>
->>>>>>> theirs
       </div>
     </footer>
   );
 }
 
 export default Footer;
-<<<<<<< ours
-=======
->>>>>>> Stashed changes
->>>>>>> theirs
