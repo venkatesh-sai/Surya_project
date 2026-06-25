@@ -1,21 +1,30 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import risoLogo from "../assets/logos/riso-logo.png";
+import xeroxLogo from "../assets/logos/xerox-logo.png";
+import surya from "../assets/logos/surya_page-0001.jpg";
+
 function Navbar() {
   return (
-<<<<<<< Updated upstream
-    <nav>
-      <h2>Xerox Dealer</h2>
-    </nav>
-=======
     <header className={`navbar ${menuOpen ? "navbar-open" : ""}`}>
       <div className="navbar-mobile-row">
         {/* Logo Area */}
         <div className="navbar-logo">
           <Link to="/" className="company-brand" onClick={closeMenu}>
-            <span className="authorized-brand-logos" aria-label="Authorized Xerox and RISO brands">
-              <img id="xerox-logo" src={xeroxLogo} alt="Xerox authorized dealer logo" />
-              <img src={risoLogo} alt="RISO authorized dealer logo" />
+            <span
+              className="authorized-brand-logos"
+              aria-label="Authorized Xerox and RISO brands"
+            >
+              {/* <img id="xerox-logo" src={xeroxLogo} alt="Xerox authorized dealer logo" />
+              <img src={risoLogo} alt="RISO authorized dealer logo" /> */}
+              <img
+                id="surya_logo"
+                src={surya}
+                alt="Xerox authorized dealer logo"
+              />
             </span>
-            <span className="drawer-subtitle">Authorized By</span>
-            <span className="company-name">Surya Enterprises</span>
+            {/* <span className="drawer-subtitle">Authorised By</span>
+            <span className="company-name">Surya Enterprises</span> */}
           </Link>
         </div>
 
@@ -48,7 +57,7 @@ function Navbar() {
       >
         <div className="navbar-drawer-header">
           <div className="drawer-brand">
-            <span className="company-name">Surya Enterprises</span>
+            <span className="company-name"></span>
           </div>
 
           <button
@@ -70,6 +79,7 @@ function Navbar() {
           <Link to="/services" onClick={closeMenu}>Services</Link>
           <Link to="/locations" onClick={closeMenu}>Locations</Link>
           <Link to="/gallery" onClick={closeMenu}>Gallery</Link>
+          <Link to="/blog" onClick={closeMenu}>Blog</Link>
           <Link to="/contact" onClick={closeMenu}>Contact</Link>
         </nav>
 
@@ -81,7 +91,6 @@ function Navbar() {
         </div>
       </div>
     </header>
->>>>>>> Stashed changes
   );
 }
 

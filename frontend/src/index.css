@@ -95,11 +95,10 @@ p {
   margin: 0;
 }
 
-<<<<<<< Updated upstream
 code,
 .counter {
   font-family: var(--mono);
-=======
+
 .business-card::before {
   background: var(--primary-red);
   content: "";
@@ -253,6 +252,10 @@ NAVBAR BRAND FIX START
   height: 43px;
   max-width: 135px;
 }
+#surya_logo {
+  height: 80px;
+  width: 150px;
+}
 
 .authorized-brand-logos img:hover {
   transform: scale(1.06);
@@ -273,7 +276,6 @@ NAVBAR BRAND FIX END
   border-left: 3px solid transparent;
   border-radius: 6px;
   color: var(--black);
->>>>>>> Stashed changes
   display: inline-flex;
   border-radius: 4px;
   color: var(--text-h);
@@ -285,8 +287,6 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
-<<<<<<< Updated upstream
-=======
 
 .machine-large {
   height: 285px;
@@ -3485,5 +3485,4 @@ ADMIN PANEL END
 
 .whatsapp {
   background: #25d366;
-}
->>>>>>> Stashed changes
+}}

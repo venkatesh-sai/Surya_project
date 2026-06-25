@@ -84,6 +84,7 @@ function Footer() {
             <Link to="/services">Services</Link>
             <Link to="/gallery">Gallery</Link>
             <Link to="/contact">Contact</Link>
+            <Link to="/blog">Blog</Link>
           </div>
         </section>
 
