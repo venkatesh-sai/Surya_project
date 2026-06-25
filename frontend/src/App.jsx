@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import AdminLayout from "./components/AdminLayout";
 import { AdminAuthProvider, ProtectedAdminRoute } from "./components/AdminAuth";
+
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Products from "./pages/Products";
@@ -15,6 +16,8 @@ import Enquiry from "./pages/Enquiry";
 import Locations from "./pages/Locations";
 import XeroxProducts from "./pages/XeroxProducts";
 import RisoProducts from "./pages/RisoProducts";
+import Blog from "./pages/Blog";
+
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminProducts from "./pages/AdminProducts";
@@ -30,6 +33,7 @@ function AppShell() {
     <>
       <ScrollToTop />
       {!isAdminRoute && <Navbar />}
+
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -41,13 +45,23 @@ function AppShell() {
           <Route path="/services" element={<Services />} />
           <Route path="/locations" element={<Locations />} />
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/enquiry" element={<Enquiry />} />
-          <Route path="/admin-login" element={<Navigate to="/admin-panel/login" replace />} />
+
+          <Route
+            path="/admin-login"
+            element={<Navigate to="/admin-panel/login" replace />}
+          />
+
           <Route path="/admin-panel/login" element={<AdminLogin />} />
+
           <Route element={<ProtectedAdminRoute />}>
             <Route path="/admin-panel" element={<AdminLayout />}>
-              <Route index element={<Navigate to="/admin-panel/dashboard" replace />} />
+              <Route
+                index
+                element={<Navigate to="/admin-panel/dashboard" replace />}
+              />
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="products" element={<AdminProducts />} />
               <Route path="brands" element={<AdminBrands />} />
@@ -57,6 +71,7 @@ function AppShell() {
           </Route>
         </Routes>
       </main>
+
       {!isAdminRoute && <Footer />}
     </>
   );
