@@ -13,7 +13,7 @@ function Footer() {
   return (
     <footer className="footer">
       {/* Footer Company Section */}
-      <div className="footer-grid">
+      <div className="footer-grid"> 
         <section>
           <h2>Surya Enterprises</h2>
           <p>
@@ -92,7 +92,7 @@ function Footer() {
         <section>
           <h3>Contact Information</h3>
           <p>Phone: 9396309283 / 9866294418</p>
-          <p>Service Areas: Warangal, Karimnagar, Nizamabad, Nalgonda</p>
+          <p>Service Areas: Hyderabad,Warangal, Karimnagar, Nizamabad, Nalgonda</p>
           <p>Working Hours: 9:30 AM - 6:30 PM</p>
         </section>
       </div>
