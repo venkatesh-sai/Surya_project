@@ -12,7 +12,7 @@ SECRET_KEY = 'django-insecure-pbbl@wuh_fo-2$h$j0*!r38h*=5rdzf+@*^#188p)oa3%gfu(q
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'testserver']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', "backend", 'testserver']
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:5173',
@@ -49,7 +49,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
     ],
 }
 
@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': '/data/db.sqlite3',
     }
 }
 

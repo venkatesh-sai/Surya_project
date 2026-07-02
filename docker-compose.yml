@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: surya_backend
+
+    ports:
+      - "8000:8000"
+
+    working_dir: /app/project
+
+    command: python manage.py runserver 0.0.0.0:8000
+
+    volumes:
+      # Mount entire backend source
+      - ./backend:/app
+
+      # Persistent database
+      - surya_data:/data
+
+      # Persistent uploaded files
+      - surya_media:/app/project/media
+
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: surya_frontend
+
+    ports:
+      - "5173:5173"
+
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+    depends_on:
+      - backend
+
+    restart: unless-stopped
+
+volumes:
+  surya_data:
+  surya_media:
